@@ -1,100 +1,182 @@
-# Lid Angle Sensor
+# Lenovo Laptop Sensor Monitor & Multimedia Control
 
-Hi, I’m Sam Gold. Did you know that you have ~rights~ a lid angle sensor in your MacBook? [The ~Constitution~ human interface device utility says you do.](https://youtu.be/wqnHtGgVAUE?t=21)
+A comprehensive Python application for monitoring hardware sensors and controlling multimedia on Lenovo laptops running Windows OS.
 
-This is a little utility that shows the angle from the sensor and, optionally, plays a wooden door creaking sound if you adjust it reeaaaaaal slowly.
+## Features
 
-## FAQ
+### Sensor Monitoring
+- **Lid Angle Sensor**: Monitor laptop lid position and angle
+- **Accelerometer**: Track device orientation and movement
+- **Gyroscope**: Monitor rotational motion
+- **Ambient Light Sensor**: Track lighting conditions
+- **Temperature Sensors**: Monitor CPU, GPU, and system temperatures
+- **Battery Monitoring**: Track battery level and charging status
+- **Fan Speed Monitoring**: Monitor cooling fan speeds
+- **Voltage Monitoring**: Track system voltage levels
 
-**What is a lid angle sensor?**
+### Multimedia Control
+- **Volume Control**: Increase, decrease, and mute system volume
+- **Media Playback**: Play/pause, next/previous track, stop media
+- **Real-time Volume Display**: Show current volume level
+- **Media Status Monitoring**: Track media playback status
 
-Despite what the name would have you believe, it is a sensor that detects the angle of the lid.
+### User Interface
+- **Modern GUI**: Clean, intuitive interface using tkinter
+- **Real-time Monitoring**: Live sensor data updates
+- **Configurable Settings**: Customize monitoring intervals and sensor selection
+- **Logging System**: Comprehensive logging with GUI display
+- **Multi-tab Interface**: Organized tabs for different functionalities
 
-**Which devices have a lid angle sensor?**
+## Requirements
 
-It was introduced with the 2019 16-inch MacBook Pro. If your laptop is newer, you probably have it.
+- Windows 10/11 (64-bit)
+- Python 3.8 or higher
+- Lenovo laptop with compatible sensors
+- Administrator privileges (for some sensor access)
 
-**My laptop should have it, why doesn't it show up?**
+## Installation
 
-I've only tested this on my M4 MacBook Pro and have hard-coded it to look for a specific sensor. If that doesn't work, try running [this script](https://gist.github.com/samhenrigold/42b5a92d1ee8aaf2b840be34bff28591) and report the output in [an issue](https://github.com/samhenrigold/LidAngleSensor/issues/new/choose).
+1. **Clone or download this repository**
+   ```bash
+   git clone <repository-url>
+   cd lenovo-sensor-monitor
+   ```
 
-**Can I use this on my iMac?**
+2. **Install Python dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Not yet tested. Feel free to slam your computer into your desk and make a PR with your results.
+3. **Run the application**
+   ```bash
+   python lenovo_sensor_monitor.py
+   ```
 
-**Why?**
+## Usage
 
-A lot of free time. I'm open to full-time work in NYC or remote. I'm a designer/design-engineer. https://samhenri.gold
+### Starting the Application
+1. Run `python lenovo_sensor_monitor.py`
+2. The application will automatically detect available sensors
+3. Click "Refresh Sensors" to update the sensor list
 
-**No I mean like why does my laptop need to know the exact angle of its lid?**
+### Sensor Monitoring
+1. Go to the "Sensor Monitor" tab
+2. Click "Start Monitoring" to begin real-time sensor data collection
+3. View live sensor data in the text area
+4. Click "Stop Monitoring" to pause data collection
 
-Oh. I don't know.
+### Multimedia Control
+1. Go to the "Multimedia Control" tab
+2. Use the volume control buttons to adjust system volume
+3. Use media control buttons to control playback
+4. Monitor current volume level in the status area
 
-**Can I contribute?**
+### Settings Configuration
+1. Go to the "Settings" tab
+2. Adjust monitoring interval (default: 1 second)
+3. Enable/disable specific sensors
+4. Click "Save Settings" to apply changes
 
-I guess.
+### Logging
+1. Go to the "Log" tab to view application logs
+2. Use "Clear Log" to clear the display
+3. Use "Save Log" to save logs to a file
 
-**Why does it say it's by Lisa?**
+## Supported Lenovo Models
 
-I signed up for my developer account when I was a kid, used my mom's name, and now it's stuck that way forever and I can't change it. That's life.
+This application is designed to work with Lenovo laptops that have:
+- ThinkPad series (X, T, P, E, L series)
+- IdeaPad series
+- Yoga series
+- Legion series
 
-**How come the audio feels kind of...weird?**
+### Sensor Compatibility
+- **Lid Angle**: Most modern Lenovo laptops
+- **Accelerometer/Gyroscope**: Yoga series, some ThinkPad models
+- **Ambient Light**: Most models with adaptive brightness
+- **Temperature**: All models (via WMI/ACPI)
+- **Battery**: All models
+- **Fan Speed**: All models with active cooling
 
-I'm bad at audio.
+## Technical Details
 
-**Where did the sound effect come from?**
+### Architecture
+- **Sensor Monitor**: Handles hardware sensor detection and data collection
+- **Multimedia Controller**: Manages system volume and media controls
+- **GUI Application**: Provides user interface and data visualization
+- **WMI Integration**: Accesses Windows Management Instrumentation for hardware data
 
-LEGO Batman 3: Beyond Gotham. But you knew that already.
+### APIs Used
+- **Windows Sensor API**: For hardware sensor access
+- **WMI (Windows Management Instrumentation)**: For system information
+- **Windows Multimedia API**: For volume and media control
+- **psutil**: For system monitoring and hardware information
 
-**Can I turn off the sound?**
+### Data Sources
+- **WMI Queries**: System hardware information
+- **psutil**: Process and system monitoring
+- **Windows Registry**: System configuration
+- **ACPI Tables**: Hardware sensor data
 
-Yes, never click "Start Audio". But this energy isn't encouraged.
+## Troubleshooting
 
-## Build and Run (Terminal)
+### Common Issues
 
-You can build and launch the app without Xcode’s UI using `xcodebuild`.
+1. **Sensors not detected**
+   - Ensure Lenovo Vantage is installed and updated
+   - Check Windows Device Manager for sensor drivers
+   - Run application as administrator
 
-### Prerequisites
+2. **Multimedia controls not working**
+   - Verify audio drivers are installed and updated
+   - Check Windows audio service is running
+   - Ensure no other application is blocking media keys
 
-- macOS with Xcode or Xcode Command Line Tools (`xcode-select --install` and maybe `xcodebuild -runFirstLaunch`)
-- Optional: GitHub CLI (`gh`) — or use `git clone` instead
+3. **Permission errors**
+   - Run application as administrator
+   - Check Windows User Account Control settings
 
-### Clone
+4. **WMI connection errors**
+   - Ensure Windows Management Instrumentation service is running
+   - Check Windows Firewall settings
+   - Verify COM+ services are enabled
 
-Using GitHub CLI:
-
-```bash
-gh repo clone samhenrigold/LidAngleSensor
-cd LidAngleSensor
+### Debug Mode
+Enable debug logging by modifying the logging level in the code:
+```python
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 ```
 
-Or with Git:
+## Contributing
 
-```bash
-git clone https://github.com/samhenrigold/LidAngleSensor.git
-cd LidAngleSensor
-```
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-### Build (Debug)
+## License
 
-```bash
-xcodebuild \
-  -project "LidAngleSensor.xcodeproj" \
-  -scheme "LidAngleSensor" \
-  -configuration Debug \
-  -derivedDataPath build \
-  CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" DEVELOPMENT_TEAM="" \
-  -arch arm64
-```
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Notes:
-- On Apple Silicon, `-arch arm64` is correct. On Intel Macs, you can use `-arch x86_64` or omit `-arch`. Intel macs don't have the feature tho, so it won't be very useful. 
-- Disabling code signing is fine for local debug builds if you are not Mr. Gold. 
+## Disclaimer
 
-### Run
+This software is provided as-is for educational and personal use. The authors are not responsible for any damage to hardware or software. Use at your own risk.
 
-```bash
-open build/Build/Products/Debug/LidAngleSensor.app
-```
+## Support
 
-If you built a Release configuration, adjust the path accordingly (replace `Debug` with `Release`).
+For issues and questions:
+1. Check the troubleshooting section
+2. Review the application logs
+3. Create an issue on the project repository
+4. Contact Lenovo support for hardware-specific issues
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- Basic sensor monitoring functionality
+- Multimedia control features
+- GUI interface
+- WMI integration
+- Logging system
